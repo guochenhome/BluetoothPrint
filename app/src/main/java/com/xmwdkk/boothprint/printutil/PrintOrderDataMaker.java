@@ -57,7 +57,7 @@ public class PrintOrderDataMaker implements PrintDataMaker {
             printer.setAlignCenter();
             printer.setEmphasizedOn();
             printer.setFontSize(1);
-            printer.print("好吃点你就多吃点");
+            printer.print("医洋科技");
             printer.printLineFeed();
             printer.setEmphasizedOff();
             printer.printLineFeed();
@@ -88,7 +88,7 @@ public class PrintOrderDataMaker implements PrintDataMaker {
             printer.printLineFeed();
             printer.print("预留时间：30分钟");
             printer.printLineFeed();
-            printer.print("联系方式：" + "18094111545454");
+            printer.print("联系方式：" + "18910489488");
             printer.printLineFeed();
             printer.printLine();
             printer.printLineFeed();
