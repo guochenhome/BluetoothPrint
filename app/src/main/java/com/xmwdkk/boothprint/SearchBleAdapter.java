@@ -9,8 +9,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.xmwdkk.boothprint.base.AppInfo;
-import com.xmwdkk.boothprint.print.PrintUtil;
+
+import com.ysh.rn.printet.base.AppInfo;
+import com.ysh.rn.printet.print.PrintUtil;
 
 import java.util.ArrayList;
 

@@ -6,6 +6,7 @@
       <module fileurl="file://D:\demo\printet\BlueToothPrint\BluetoothPrint-master\MyApplication\MyApplication.iml" filepath="D:\demo\printet\BlueToothPrint\BluetoothPrint-master\MyApplication\MyApplication.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://D:\demo\printet\BlueToothPrint\BluetoothPrint-master\MyApplication\app\app.iml" filepath="D:\demo\printet\BlueToothPrint\BluetoothPrint-master\MyApplication\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/printet/printet.iml" filepath="$PROJECT_DIR$/printet/printet.iml" />
     </modules>
   </component>
 </project>
