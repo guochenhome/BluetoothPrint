@@ -4,6 +4,7 @@ import android.content.Context;
 
 
 import com.ysh.rn.printet.R;
+import com.ysh.rn.printet.entity.OrderInfoEntity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.Locale;
 
 /**
  * 测试数据生成器
- * Created by liuguirong on 8/1/17.
+ * Created by guochen on 8/1/17.
  */
 
 public class PrintOrderDataMaker implements PrintDataMaker {
@@ -24,14 +25,15 @@ public class PrintOrderDataMaker implements PrintDataMaker {
     private int width;
     private int height;
     Context btService;
-    private String remark = "微点筷客推出了餐厅管理系统，可用手机快速接单（来自客户的预订订单），进行订单管理、后厨管理等管理餐厅。";
 
+    private OrderInfoEntity orderInfoEntity;
 
-    public PrintOrderDataMaker( Context btService, String qr, int width, int height) {
+    public PrintOrderDataMaker( Context btService, String qr, int width, int height,OrderInfoEntity entity) {
         this.qr = qr;
         this.width = width;
         this.height = height;
         this.btService = btService;
+        this.orderInfoEntity=entity;
     }
 
 
@@ -58,7 +60,7 @@ public class PrintOrderDataMaker implements PrintDataMaker {
             printer.setAlignCenter();
             printer.setEmphasizedOn();
             printer.setFontSize(1);
-            printer.print("医洋科技");
+            printer.print(this.orderInfoEntity.getTitle());
             printer.printLineFeed();
             printer.setEmphasizedOff();
             printer.printLineFeed();
@@ -102,10 +104,10 @@ public class PrintOrderDataMaker implements PrintDataMaker {
             printer.printLineFeed();
 
                 printer.setAlignCenter();
-                printer.print("菜品信息");
+                printer.print("购买信息");
                 printer.printLineFeed();
                 printer.setAlignCenter();
-                printer.printInOneLine("菜名", "数量", "单价", 0);
+                printer.printInOneLine("药品", "数量", "单价", 0);
                 printer.printLineFeed();
                 for (int i = 0; i < 3; i++) {
 

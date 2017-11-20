@@ -14,6 +14,7 @@ import com.ysh.rn.printet.BluetoothController;
 import com.ysh.rn.printet.BtService;
 import com.ysh.rn.printet.base.AppInfo;
 import com.ysh.rn.printet.bt.BluetoothActivity;
+import com.ysh.rn.printet.entity.OrderInfoEntity;
 import com.ysh.rn.printet.print.PrintMsgEvent;
 import com.ysh.rn.printet.print.PrintUtil;
 import com.ysh.rn.printet.print.PrinterMsgType;
@@ -86,8 +87,11 @@ public class MainActivity extends BluetoothActivity implements View.OnClickListe
                         ToastUtil.showToast(MainActivity.this, "蓝牙被关闭请打开...");
                     } else {
                         ToastUtil.showToast(MainActivity.this, "打印测试...");
+                        OrderInfoEntity entity=new OrderInfoEntity();
+                        entity.setTitle("北京医洋科技有限公司");
                         Intent intent = new Intent(getApplicationContext(), BtService.class);
                         intent.setAction(PrintUtil.ACTION_PRINT_TEST);
+                        intent.putExtra(PrintUtil.ACTION_PRINT_ENTITY,entity);
                         startService(intent);
                     }
 

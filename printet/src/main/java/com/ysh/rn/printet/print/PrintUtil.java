@@ -25,6 +25,7 @@ public class PrintUtil {
     private static final String DEFAULT_BLUETOOTH_DEVICE_NAME = "default_bluetooth_device_name";//蓝牙设备名称
 
     public static final String ACTION_PRINT_TEST = "action_print_test";
+    public static final String ACTION_PRINT_ENTITY="action_print_entity";
     public static final String ACTION_PRINT_TEST_TWO = "action_print_test_two";
     public static final String ACTION_PRINT = "action_print";
     public static final String ACTION_PRINT_TICKET = "action_print_ticket";

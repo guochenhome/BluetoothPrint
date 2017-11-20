@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
+import com.ysh.rn.printet.entity.OrderInfoEntity;
 import com.ysh.rn.printet.print.GPrinterCommand;
 import com.ysh.rn.printet.print.PrintPic;
 import com.ysh.rn.printet.print.PrintQueue;
@@ -38,12 +39,15 @@ public class BtService extends IntentService {
         super(name);
     }
 
+    private OrderInfoEntity entity;
+
     @Override
     protected void onHandleIntent(Intent intent) {
         if (intent == null || intent.getAction() == null) {
             return;
         }
         if (intent.getAction().equals(PrintUtil.ACTION_PRINT_TEST)) {
+            entity= (OrderInfoEntity) intent.getSerializableExtra(PrintUtil.ACTION_PRINT_ENTITY);
             printTest();
         } else if (intent.getAction().equals(PrintUtil.ACTION_PRINT_TEST_TWO)) {
             printTesttwo(3);
@@ -54,7 +58,7 @@ public class BtService extends IntentService {
     }
 
     private void printTest() {
-            PrintOrderDataMaker printOrderDataMaker = new PrintOrderDataMaker(this,"", PrinterWriter58mm.TYPE_58, PrinterWriter.HEIGHT_PARTING_DEFAULT);
+            PrintOrderDataMaker printOrderDataMaker = new PrintOrderDataMaker(this,"", PrinterWriter58mm.TYPE_58, PrinterWriter.HEIGHT_PARTING_DEFAULT,entity);
             ArrayList<byte[]> printData = (ArrayList<byte[]>) printOrderDataMaker.getPrintData(PrinterWriter58mm.TYPE_58);
             PrintQueue.getQueue(getApplicationContext()).add(printData);
 
