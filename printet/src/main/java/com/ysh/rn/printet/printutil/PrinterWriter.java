@@ -353,7 +353,9 @@ public abstract class PrinterWriter {
      *
      * @return 图片最大宽度
      */
-    protected abstract int getDrawableMaxWidth();
+    protected  int getDrawableMaxWidth(){
+        return 50;
+    };
 
     /**
      * 缩放图片

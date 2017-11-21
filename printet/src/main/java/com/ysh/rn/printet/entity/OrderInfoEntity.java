@@ -1,6 +1,8 @@
 package com.ysh.rn.printet.entity;
 
 import android.graphics.Bitmap;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import java.io.Serializable;
 import java.util.List;
@@ -9,7 +11,7 @@ import java.util.List;
  * Created by dell on 2017/11/20.
  */
 
-public class OrderInfoEntity implements Serializable {
+public class OrderInfoEntity implements Parcelable {
 
     /**
      * 订单title
@@ -59,6 +61,80 @@ public class OrderInfoEntity implements Serializable {
      * 订单logo
      */
     private Bitmap logo;
+
+
+    public OrderInfoEntity(String title, String info, Integer order_number, Bitmap order_number_code, String time, String address, List<GoodsEntity> list, String all_pirce, String rewema_string, Bitmap erwema_coder, String tankinfo, Bitmap logo) {
+        super();
+        this.title = title;
+        this.info = info;
+        this.order_number = order_number;
+        this.order_number_code = order_number_code;
+        this.time = time;
+        this.address = address;
+        this.list = list;
+        this.all_pirce = all_pirce;
+        this.rewema_string = rewema_string;
+        this.erwema_coder = erwema_coder;
+        this.tankinfo = tankinfo;
+        this.logo = logo;
+    }
+
+    protected OrderInfoEntity(Parcel in) {
+        title = in.readString();
+        info = in.readString();
+        if (in.readByte() == 0) {
+            order_number = null;
+        } else {
+            order_number = in.readInt();
+        }
+        order_number_code = in.readParcelable(Bitmap.class.getClassLoader());
+        time = in.readString();
+        address = in.readString();
+        list = in.createTypedArrayList(GoodsEntity.CREATOR);
+        all_pirce = in.readString();
+        rewema_string = in.readString();
+        erwema_coder = in.readParcelable(Bitmap.class.getClassLoader());
+        tankinfo = in.readString();
+        logo = in.readParcelable(Bitmap.class.getClassLoader());
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
+        dest.writeString(info);
+        if (order_number == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(order_number);
+        }
+        dest.writeParcelable(order_number_code, flags);
+        dest.writeString(time);
+        dest.writeString(address);
+        dest.writeTypedList(list);
+        dest.writeString(all_pirce);
+        dest.writeString(rewema_string);
+        dest.writeParcelable(erwema_coder, flags);
+        dest.writeString(tankinfo);
+        dest.writeParcelable(logo, flags);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<OrderInfoEntity> CREATOR = new Creator<OrderInfoEntity>() {
+        @Override
+        public OrderInfoEntity createFromParcel(Parcel in) {
+            return new OrderInfoEntity(in);
+        }
+
+        @Override
+        public OrderInfoEntity[] newArray(int size) {
+            return new OrderInfoEntity[size];
+        }
+    };
 
     public String getTitle() {
         return title;

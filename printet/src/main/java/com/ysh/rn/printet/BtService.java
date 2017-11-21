@@ -47,28 +47,38 @@ public class BtService extends IntentService {
             return;
         }
         if (intent.getAction().equals(PrintUtil.ACTION_PRINT_TEST)) {
-            entity= (OrderInfoEntity) intent.getSerializableExtra(PrintUtil.ACTION_PRINT_ENTITY);
-            printTest();
+            if (intent.getParcelableExtra(PrintUtil.ACTION_PRINT_ENTITY) != null) {
+                entity = intent.getParcelableExtra(PrintUtil.ACTION_PRINT_ENTITY);
+                printTest(entity);
+            } else {
+                Log.i("打印机", "传递数据为null");
+            }
         } else if (intent.getAction().equals(PrintUtil.ACTION_PRINT_TEST_TWO)) {
             printTesttwo(3);
-        }else if (intent.getAction().equals(PrintUtil.ACTION_PRINT_BITMAP)) {
-            printBitmapTest();
+        } else if (intent.getAction().equals(PrintUtil.ACTION_PRINT_BITMAP)) {
+            if (intent.getParcelableExtra(PrintUtil.ACTION_PRINT_ENTITY) != null) {
+                entity = intent.getParcelableExtra(PrintUtil.ACTION_PRINT_ENTITY);
+                printBitmapTest(entity.getOrder_number_code());
+            } else {
+                Log.i("打印机", "传递数据为null");
+            }
+
         }
 
     }
 
-    private void printTest() {
-            PrintOrderDataMaker printOrderDataMaker = new PrintOrderDataMaker(this,"", PrinterWriter58mm.TYPE_58, PrinterWriter.HEIGHT_PARTING_DEFAULT,entity);
-            ArrayList<byte[]> printData = (ArrayList<byte[]>) printOrderDataMaker.getPrintData(PrinterWriter58mm.TYPE_58);
-            PrintQueue.getQueue(getApplicationContext()).add(printData);
-
+    private void printTest(OrderInfoEntity entity) {
+        PrintOrderDataMaker printOrderDataMaker = new PrintOrderDataMaker(this, "", PrinterWriter58mm.TYPE_58, PrinterWriter.HEIGHT_PARTING_DEFAULT, entity);
+        ArrayList<byte[]> printData = (ArrayList<byte[]>) printOrderDataMaker.getPrintData(PrinterWriter58mm.TYPE_58);
+        PrintQueue.getQueue(getApplicationContext()).add(printData);
     }
 
     /**
      * 打印几遍
+     *
      * @param num
      */
-  private void printTesttwo(int num) {
+    private void printTesttwo(int num) {
         try {
             ArrayList<byte[]> bytes = new ArrayList<byte[]>();
             for (int i = 0; i < num; i++) {
@@ -93,16 +103,7 @@ public class BtService extends IntentService {
         PrintQueue.getQueue(getApplicationContext()).add(byteArrayExtra);
     }
 
-    private void printBitmapTest() {
-        BufferedInputStream bis;
-        try {
-            bis = new BufferedInputStream(getAssets().open(
-                    "ic_launcher.png"));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return;
-        }
-        Bitmap bitmap = BitmapFactory.decodeStream(bis);
+    private void printBitmapTest(Bitmap bitmap) {
         PrintPic printPic = PrintPic.getInstance();
         printPic.init(bitmap);
         if (null != bitmap) {
@@ -122,15 +123,4 @@ public class BtService extends IntentService {
         printBytes.add(GPrinterCommand.print);
         PrintQueue.getQueue(getApplicationContext()).add(bytes);
     }
-//
-//    private void printPainting() {
-//        byte[] bytes = PrintPic.getInstance().printDraw();
-//        ArrayList<byte[]> printBytes = new ArrayList<byte[]>();
-//        printBytes.add(GPrinterCommand.reset);
-//        printBytes.add(GPrinterCommand.print);
-//        printBytes.add(bytes);
-//        Log.e("BtService", "image bytes size is :" + bytes.length);
-//        printBytes.add(GPrinterCommand.print);
-//        PrintQueue.getQueue(getApplicationContext()).add(bytes);
-//    }
 }

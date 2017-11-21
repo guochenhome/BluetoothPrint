@@ -87,11 +87,22 @@ public class MainActivity extends BluetoothActivity implements View.OnClickListe
                         ToastUtil.showToast(MainActivity.this, "蓝牙被关闭请打开...");
                     } else {
                         ToastUtil.showToast(MainActivity.this, "打印测试...");
-                        OrderInfoEntity entity=new OrderInfoEntity();
-                        entity.setTitle("北京医洋科技有限公司");
+                        OrderInfoEntity entity = new OrderInfoEntity("北京医洋科技有限公司"
+                                , "北京医洋科技有限公司"
+                                , 1
+                                , KlnZxingUtil.CreateOneDCode("12345")
+                                , "time"
+                                , "地址"
+                                , null
+                                , "总价"
+                                , "rewnma_string"
+                                , null,
+                                "tank"
+                                , null);
+//                        entity.setOrder_number_code(KlnZxingUtil.CreateOneDCode("123456789"));
                         Intent intent = new Intent(getApplicationContext(), BtService.class);
                         intent.setAction(PrintUtil.ACTION_PRINT_TEST);
-                        intent.putExtra(PrintUtil.ACTION_PRINT_ENTITY,entity);
+                        intent.putExtra(PrintUtil.ACTION_PRINT_ENTITY, entity);
                         startService(intent);
                     }
 
@@ -114,8 +125,21 @@ public class MainActivity extends BluetoothActivity implements View.OnClickListe
                     startActivity(new Intent(MainActivity.this, SearchBluetoothActivity.class));
                 } else {
                     ToastUtil.showToast(MainActivity.this, "打印图片...");
+                    OrderInfoEntity entity1 = new OrderInfoEntity("北京医洋科技有限公司"
+                            , "北京医洋科技有限公司"
+                            , 1
+                            , KlnZxingUtil.CreateOneDCode("12345")
+                            , "time"
+                            , "地址"
+                            , null
+                            , "总价"
+                            , "rewnma_string"
+                            , null,
+                            "tank"
+                            , null);
                     Intent intent2 = new Intent(getApplicationContext(), BtService.class);
                     intent2.setAction(PrintUtil.ACTION_PRINT_BITMAP);
+                    intent2.putExtra(PrintUtil.ACTION_PRINT_ENTITY, entity1);
                     startService(intent2);
 
                 }
