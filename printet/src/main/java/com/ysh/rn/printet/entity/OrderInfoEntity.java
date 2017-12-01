@@ -84,6 +84,9 @@ public class OrderInfoEntity implements Parcelable {
         this.phone=phone;
     }
 
+    public OrderInfoEntity() {
+    }
+
     protected OrderInfoEntity(Parcel in) {
         title = in.readString();
         info = in.readString();
