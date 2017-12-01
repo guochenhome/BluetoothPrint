@@ -64,7 +64,7 @@ public class KlnZxingUtil {
         BitMatrix matrix = null;
         try {
             matrix = new MultiFormatWriter().encode(content,
-                    BarcodeFormat.CODE_128, 500, 200);
+                    BarcodeFormat.CODE_128, 400, 100);
         } catch (WriterException e) {
             e.printStackTrace();
         }

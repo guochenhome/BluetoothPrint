@@ -18,13 +18,13 @@ public class OrderInfoEntity implements Parcelable {
      */
     private String title;
     /**
-     * 订单书名
+     * 订单说明
      */
     private String info;
     /**
      * 订单编码
      */
-    private Integer order_number;
+    private String order_number;
     /**
      * 订单编码条
      */
@@ -37,6 +37,10 @@ public class OrderInfoEntity implements Parcelable {
      * 订单使用地址
      */
     private String address;
+    /**
+     * 联系方式
+     */
+    private String phone;
     /**
      * 订单商品内容
      */
@@ -52,7 +56,7 @@ public class OrderInfoEntity implements Parcelable {
     /**
      * 订单二维码
      */
-    private Bitmap erwema_coder;
+    private String erwema_coder;
     /**
      * 订单问候语
      */
@@ -63,7 +67,7 @@ public class OrderInfoEntity implements Parcelable {
     private Bitmap logo;
 
 
-    public OrderInfoEntity(String title, String info, Integer order_number, Bitmap order_number_code, String time, String address, List<GoodsEntity> list, String all_pirce, String rewema_string, Bitmap erwema_coder, String tankinfo, Bitmap logo) {
+    public OrderInfoEntity(String title, String info, String order_number, Bitmap order_number_code, String time, String address, List<GoodsEntity> list, String all_pirce, String rewema_string, String erwema_coder, String tankinfo, Bitmap logo,String phone) {
         super();
         this.title = title;
         this.info = info;
@@ -77,46 +81,40 @@ public class OrderInfoEntity implements Parcelable {
         this.erwema_coder = erwema_coder;
         this.tankinfo = tankinfo;
         this.logo = logo;
+        this.phone=phone;
     }
 
     protected OrderInfoEntity(Parcel in) {
         title = in.readString();
         info = in.readString();
-        if (in.readByte() == 0) {
-            order_number = null;
-        } else {
-            order_number = in.readInt();
-        }
+        order_number = in.readString();
         order_number_code = in.readParcelable(Bitmap.class.getClassLoader());
         time = in.readString();
         address = in.readString();
         list = in.createTypedArrayList(GoodsEntity.CREATOR);
         all_pirce = in.readString();
         rewema_string = in.readString();
-        erwema_coder = in.readParcelable(Bitmap.class.getClassLoader());
+        erwema_coder = in.readString();
         tankinfo = in.readString();
         logo = in.readParcelable(Bitmap.class.getClassLoader());
+        phone=in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(title);
         dest.writeString(info);
-        if (order_number == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(order_number);
-        }
+        dest.writeString(order_number);
         dest.writeParcelable(order_number_code, flags);
         dest.writeString(time);
         dest.writeString(address);
         dest.writeTypedList(list);
         dest.writeString(all_pirce);
         dest.writeString(rewema_string);
-        dest.writeParcelable(erwema_coder, flags);
+        dest.writeString(erwema_coder);
         dest.writeString(tankinfo);
         dest.writeParcelable(logo, flags);
+        dest.writeString(phone);
     }
 
     @Override
@@ -152,11 +150,11 @@ public class OrderInfoEntity implements Parcelable {
         this.info = info;
     }
 
-    public Integer getOrder_number() {
+    public String getOrder_number() {
         return order_number;
     }
 
-    public void setOrder_number(Integer order_number) {
+    public void setOrder_number(String order_number) {
         this.order_number = order_number;
     }
 
@@ -208,11 +206,11 @@ public class OrderInfoEntity implements Parcelable {
         this.rewema_string = rewema_string;
     }
 
-    public Bitmap getErwema_coder() {
+    public String getErwema_coder() {
         return erwema_coder;
     }
 
-    public void setErwema_coder(Bitmap erwema_coder) {
+    public void setErwema_coder(String erwema_coder) {
         this.erwema_coder = erwema_coder;
     }
 
@@ -230,5 +228,13 @@ public class OrderInfoEntity implements Parcelable {
 
     public void setLogo(Bitmap logo) {
         this.logo = logo;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

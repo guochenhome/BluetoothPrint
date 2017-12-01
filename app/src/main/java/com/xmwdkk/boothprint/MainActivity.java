@@ -3,6 +3,7 @@ package com.xmwdkk.boothprint;
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,11 +15,15 @@ import com.ysh.rn.printet.BluetoothController;
 import com.ysh.rn.printet.BtService;
 import com.ysh.rn.printet.base.AppInfo;
 import com.ysh.rn.printet.bt.BluetoothActivity;
+import com.ysh.rn.printet.entity.GoodsEntity;
 import com.ysh.rn.printet.entity.OrderInfoEntity;
 import com.ysh.rn.printet.print.PrintMsgEvent;
 import com.ysh.rn.printet.print.PrintUtil;
 import com.ysh.rn.printet.print.PrinterMsgType;
 import com.ysh.rn.printet.util.ToastUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
@@ -87,18 +92,29 @@ public class MainActivity extends BluetoothActivity implements View.OnClickListe
                         ToastUtil.showToast(MainActivity.this, "蓝牙被关闭请打开...");
                     } else {
                         ToastUtil.showToast(MainActivity.this, "打印测试...");
+                        List<GoodsEntity> goodsEntityList= new ArrayList<>();
+                        for(int i=0;i<3;i++){
+                            GoodsEntity goodsEntity=new GoodsEntity();
+                            goodsEntity.setCount(i);
+                            goodsEntity.setName("郭陈"+i);
+                            goodsEntity.setPrice("12.1"+i);
+                            goodsEntity.setPrice_show(true);
+                            goodsEntityList.add(goodsEntity);
+                        }
+
                         OrderInfoEntity entity = new OrderInfoEntity("北京医洋科技有限公司"
                                 , "北京医洋科技有限公司"
-                                , 1
-                                , KlnZxingUtil.CreateOneDCode("12345")
+                                , "81659140149461814356"
+                                , KlnZxingUtil.CreateOneDCode("81659140149461814356")
                                 , "time"
                                 , "地址"
-                                , null
+                                , goodsEntityList
                                 , "总价"
                                 , "rewnma_string"
-                                , null,
+                                , QRCodeUtil.createQRImage("https://github.com/guochen", 300, 300, null),
                                 "tank"
-                                , null);
+                                , null
+                        ,"18910489494");
 //                        entity.setOrder_number_code(KlnZxingUtil.CreateOneDCode("123456789"));
                         Intent intent = new Intent(getApplicationContext(), BtService.class);
                         intent.setAction(PrintUtil.ACTION_PRINT_TEST);
@@ -124,22 +140,9 @@ public class MainActivity extends BluetoothActivity implements View.OnClickListe
                     ToastUtil.showToast(MainActivity.this, "请连接蓝牙...");
                     startActivity(new Intent(MainActivity.this, SearchBluetoothActivity.class));
                 } else {
-                    ToastUtil.showToast(MainActivity.this, "打印图片...");
-                    OrderInfoEntity entity1 = new OrderInfoEntity("北京医洋科技有限公司"
-                            , "北京医洋科技有限公司"
-                            , 1
-                            , KlnZxingUtil.CreateOneDCode("12345")
-                            , "time"
-                            , "地址"
-                            , null
-                            , "总价"
-                            , "rewnma_string"
-                            , null,
-                            "tank"
-                            , null);
                     Intent intent2 = new Intent(getApplicationContext(), BtService.class);
                     intent2.setAction(PrintUtil.ACTION_PRINT_BITMAP);
-                    intent2.putExtra(PrintUtil.ACTION_PRINT_ENTITY, entity1);
+                    intent2.putExtra(PrintUtil.ACTION_PRINT_ENTITY, KlnZxingUtil.createQRCode("https://y.qq.com",400));
                     startService(intent2);
 
                 }

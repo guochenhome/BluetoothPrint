@@ -30,6 +30,15 @@ public class GoodsEntity implements Parcelable{
      */
     private Boolean price_show;
 
+    public GoodsEntity(String name, Integer count, String price, Boolean price_show) {
+        this.name = name;
+        this.count = count;
+        this.price = price;
+        this.price_show = price_show;
+    }
+
+    public GoodsEntity() {
+    }
 
     protected GoodsEntity(Parcel in) {
         name = in.readString();
