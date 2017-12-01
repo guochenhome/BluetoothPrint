@@ -48,7 +48,7 @@ public class PrintOrderDataMaker implements PrintDataMaker {
 
         ArrayList<byte[]> data = new ArrayList<>();
         try {
-            PrinterWriter printer= type == PrinterWriter58mm.TYPE_58 ? new PrinterWriter58mm(height, width) : new PrinterWriter80mm(height, width);
+            PrinterWriter printer = type == PrinterWriter58mm.TYPE_58 ? new PrinterWriter58mm(height, width) : new PrinterWriter80mm(height, width);
             PrintPic printPic = PrintPic.getInstance();
             printer.setAlignCenter();
             data.add(printer.getDataAndReset());
@@ -70,7 +70,7 @@ public class PrintOrderDataMaker implements PrintDataMaker {
             printer.printLineFeed();
             printer.setFontSize(0);
             printer.setAlignCenter();
-            printer.print(this.orderInfoEntity.getInfo()+"\n");
+            printer.print(this.orderInfoEntity.getInfo() + "\n");
             printer.printLineFeed();
 
             data.add(printer.getDataAndReset());
@@ -156,7 +156,7 @@ public class PrintOrderDataMaker implements PrintDataMaker {
 
             printer.printLine();
             printer.setAlignCenter();
-            printer.print(this.orderInfoEntity.getTankinfo()+"\n");
+            printer.print(this.orderInfoEntity.getTankinfo() + "\n");
             printer.printLineFeed();
             printer.print("\n\n");
             printer.printLineFeed();
