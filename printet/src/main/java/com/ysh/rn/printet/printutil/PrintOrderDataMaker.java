@@ -78,24 +78,6 @@ public class PrintOrderDataMaker implements PrintDataMaker {
             /**
              * 打印编码条形码
              */
-//            Bitmap bitmap=this.orderInfoEntity.getOrder_number_code();
-//            printPic.init(bitmap);
-//            if (null != bitmap) {
-//                if (bitmap.isRecycled()) {
-//                    bitmap = null;
-//                } else {
-//                    bitmap.recycle();
-//                    bitmap = null;
-//                }
-//            }
-//            byte[] bytes = printPic.printDraw();
-//            ArrayList<byte[]> printBytes = new ArrayList<byte[]>();
-//            printBytes.add(GPrinterCommand.reset);
-//            printBytes.add(GPrinterCommand.print);
-//            printBytes.add(bytes);
-//            Log.e("BtService", "image bytes size is :" + bytes.length);
-//            printBytes.add(GPrinterCommand.print);
-//            data.addAll(printBytes);
             ArrayList<byte[]> image = printer.getImageByte(this.orderInfoEntity.getOrder_number_code());
             data.addAll(image);
 
@@ -120,31 +102,33 @@ public class PrintOrderDataMaker implements PrintDataMaker {
 
             printer.printLine();
             printer.printLineFeed();
+//----------------------------------------------------药品信息----------------------------------------------------------------------------------
+            if (orderInfoEntity.getList() != null && orderInfoEntity.getList().size() > 0) {
+                printer.setAlignCenter();
+                printer.print("药品信息\n");
+                printer.printLineFeed();
 
-            printer.setAlignCenter();
-            printer.print("药品信息\n");
-            printer.printLineFeed();
+                printer.setAlignCenter();
+                printer.printInOneLine("药品", "数量", "单价", 0);
+                printer.printLineFeed();
 
-            printer.setAlignCenter();
-            printer.printInOneLine("药品", "数量", "单价", 0);
-            printer.printLineFeed();
+                for (int i = 0; i < orderInfoEntity.getList().size(); i++) {
 
-            for (int i = 0; i < orderInfoEntity.getList().size(); i++) {
-
-                printer.printInOneLine(orderInfoEntity.getList().get(i).getName(), "X" + orderInfoEntity.getList().get(i).getCount(), "￥" + orderInfoEntity.getList().get(i).getPrice(), 0);
+                    printer.printInOneLine(orderInfoEntity.getList().get(i).getName(), "X" + orderInfoEntity.getList().get(i).getCount(), "￥" + orderInfoEntity.getList().get(i).getPrice(), 0);
+                    printer.printLineFeed();
+                }
+                printer.printLineFeed();
+                printer.printLine();
                 printer.printLineFeed();
             }
-            printer.printLineFeed();
-            printer.printLine();
-            printer.printLineFeed();
-
-            printer.setAlignLeft();
-            printer.printInOneLine("总计：", "￥" + orderInfoEntity.getAll_pirce(), 0);
-
-
-            printer.printLine();
-            printer.printLineFeed();
-
+//=====================================================================================================================================
+            if (orderInfoEntity.getAll_pirce() != null && !orderInfoEntity.getAll_pirce().equals("")) {
+                printer.setAlignLeft();
+                printer.printInOneLine("总计：", "￥" + orderInfoEntity.getAll_pirce(), 0);
+                printer.printLine();
+                printer.printLineFeed();
+            }
+//==============================================================================================================================
             printer.setAlignCenter();
             printer.print(this.orderInfoEntity.getRewema_string());
             printer.printLineFeed();
