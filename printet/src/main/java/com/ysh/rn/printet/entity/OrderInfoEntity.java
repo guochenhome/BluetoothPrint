@@ -66,6 +66,11 @@ public class OrderInfoEntity implements Parcelable {
      */
     private Bitmap logo;
 
+    /**
+     * 患者姓名
+     */
+    private String name;
+
 
     public OrderInfoEntity(String title, String info, String order_number, Bitmap order_number_code, String time, String address, List<GoodsEntity> list, String all_pirce, String rewema_string, String erwema_coder, String tankinfo, Bitmap logo,String phone) {
         super();
@@ -101,6 +106,7 @@ public class OrderInfoEntity implements Parcelable {
         tankinfo = in.readString();
         logo = in.readParcelable(Bitmap.class.getClassLoader());
         phone=in.readString();
+        name=in.readString();
     }
 
     @Override
@@ -118,6 +124,7 @@ public class OrderInfoEntity implements Parcelable {
         dest.writeString(tankinfo);
         dest.writeParcelable(logo, flags);
         dest.writeString(phone);
+        dest.writeString(name);
     }
 
     @Override
@@ -239,5 +246,13 @@ public class OrderInfoEntity implements Parcelable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

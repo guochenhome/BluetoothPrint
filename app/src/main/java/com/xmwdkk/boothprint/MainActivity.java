@@ -93,14 +93,14 @@ public class MainActivity extends BluetoothActivity implements View.OnClickListe
                     } else {
                         ToastUtil.showToast(MainActivity.this, "打印测试...");
                         List<GoodsEntity> goodsEntityList= new ArrayList<>();
-                        for(int i=0;i<3;i++){
-                            GoodsEntity goodsEntity=new GoodsEntity();
-                            goodsEntity.setCount(i);
-                            goodsEntity.setName("郭陈"+i);
-                            goodsEntity.setPrice("12.1"+i);
-                            goodsEntity.setPrice_show(true);
-                            goodsEntityList.add(goodsEntity);
-                        }
+//                        for(int i=0;i<3;i++){
+//                            GoodsEntity goodsEntity=new GoodsEntity();
+//                            goodsEntity.setCount(i);
+//                            goodsEntity.setName("郭陈"+i);
+//                            goodsEntity.setPrice("12.1"+i);
+//                            goodsEntity.setPrice_show(true);
+//                            goodsEntityList.add(goodsEntity);
+//                        }
 
                         OrderInfoEntity entity = new OrderInfoEntity("北京医洋科技有限公司"
                                 , "北京医洋科技有限公司"
@@ -109,12 +109,13 @@ public class MainActivity extends BluetoothActivity implements View.OnClickListe
                                 , "time"
                                 , "地址"
                                 , goodsEntityList
-                                , "总价"
+                                , ""
                                 , "rewnma_string"
                                 , QRCodeUtil.createQRImage("https://github.com/guochen", 300, 300, null),
                                 "tank"
                                 , null
                         ,"18910489494");
+                        entity.setName("guochen");
 //                        entity.setOrder_number_code(KlnZxingUtil.CreateOneDCode("123456789"));
                         Intent intent = new Intent(getApplicationContext(), BtService.class);
                         intent.setAction(PrintUtil.ACTION_PRINT_TEST);

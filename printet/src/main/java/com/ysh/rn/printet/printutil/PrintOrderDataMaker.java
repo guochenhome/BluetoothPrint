@@ -113,9 +113,17 @@ public class PrintOrderDataMaker implements PrintDataMaker {
                 printer.printLineFeed();
 
                 for (int i = 0; i < orderInfoEntity.getList().size(); i++) {
+                    /*
+                    显示价格和不显示价格
+                     */
+                    if (orderInfoEntity.getAll_pirce() != null && !orderInfoEntity.getAll_pirce().equals("")) {
+                        printer.printInOneLine(orderInfoEntity.getList().get(i).getName(), "X" + orderInfoEntity.getList().get(i).getCount(), "￥" + orderInfoEntity.getList().get(i).getPrice(), 0);
+                        printer.printLineFeed();
+                    } else {
+                        printer.printInOneLine(orderInfoEntity.getList().get(i).getName(), "X" + orderInfoEntity.getList().get(i).getCount(), 0);
+                        printer.printLineFeed();
+                    }
 
-                    printer.printInOneLine(orderInfoEntity.getList().get(i).getName(), "X" + orderInfoEntity.getList().get(i).getCount(), "￥" + orderInfoEntity.getList().get(i).getPrice(), 0);
-                    printer.printLineFeed();
                 }
                 printer.printLineFeed();
                 printer.printLine();
@@ -128,7 +136,15 @@ public class PrintOrderDataMaker implements PrintDataMaker {
                 printer.printLine();
                 printer.printLineFeed();
             }
-//==============================================================================================================================
+//=========================================患者姓名=====================================================================================
+            if (orderInfoEntity.getName() != null && !orderInfoEntity.getName().equals("")) {
+                printer.setAlignLeft();
+                printer.print(orderInfoEntity.getName());
+                printer.printLineFeed();
+                printer.printLine();
+                printer.printLineFeed();
+            }
+            //================================================================
             printer.setAlignCenter();
             printer.print(this.orderInfoEntity.getRewema_string());
             printer.printLineFeed();
