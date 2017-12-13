@@ -109,7 +109,11 @@ public class PrintOrderDataMaker implements PrintDataMaker {
                 printer.printLineFeed();
 
                 printer.setAlignCenter();
-                printer.printInOneLine("药品", "数量", "单价", 0);
+                if (orderInfoEntity.getAll_pirce() != null && !orderInfoEntity.getAll_pirce().equals("")) {
+                    printer.printInOneLine("药品", "数量", "单价", 0);
+                }else{
+                    printer.printInOneLine("药品", "数量", 0);
+                }
                 printer.printLineFeed();
 
                 for (int i = 0; i < orderInfoEntity.getList().size(); i++) {

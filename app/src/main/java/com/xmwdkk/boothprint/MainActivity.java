@@ -93,14 +93,14 @@ public class MainActivity extends BluetoothActivity implements View.OnClickListe
                     } else {
                         ToastUtil.showToast(MainActivity.this, "打印测试...");
                         List<GoodsEntity> goodsEntityList= new ArrayList<>();
-//                        for(int i=0;i<3;i++){
-//                            GoodsEntity goodsEntity=new GoodsEntity();
-//                            goodsEntity.setCount(i);
-//                            goodsEntity.setName("郭陈"+i);
-//                            goodsEntity.setPrice("12.1"+i);
-//                            goodsEntity.setPrice_show(true);
-//                            goodsEntityList.add(goodsEntity);
-//                        }
+                        for(int i=0;i<3;i++){
+                            GoodsEntity goodsEntity=new GoodsEntity();
+                            goodsEntity.setCount(i);
+                            goodsEntity.setName("郭陈"+i);
+                            goodsEntity.setPrice("12.1"+i);
+                            goodsEntity.setPrice_show(true);
+                            goodsEntityList.add(goodsEntity);
+                        }
 
                         OrderInfoEntity entity = new OrderInfoEntity("北京医洋科技有限公司"
                                 , "北京医洋科技有限公司"
