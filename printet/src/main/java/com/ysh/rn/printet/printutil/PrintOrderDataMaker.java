@@ -143,7 +143,7 @@ public class PrintOrderDataMaker implements PrintDataMaker {
 //=========================================患者姓名=====================================================================================
             if (orderInfoEntity.getName() != null && !orderInfoEntity.getName().equals("")) {
                 printer.setAlignLeft();
-                printer.print(orderInfoEntity.getName());
+                printer.print("患者姓名："+orderInfoEntity.getName());
                 printer.printLineFeed();
                 printer.printLine();
                 printer.printLineFeed();

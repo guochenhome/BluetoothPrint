@@ -109,13 +109,12 @@ public class MainActivity extends BluetoothActivity implements View.OnClickListe
                                 , "time"
                                 , "地址"
                                 , goodsEntityList
-                                , ""
+                                , "总价"
                                 , "rewnma_string"
                                 , QRCodeUtil.createQRImage("https://github.com/guochen", 300, 300, null),
                                 "tank"
                                 , null
                         ,"18910489494");
-                        entity.setName("guochen");
 //                        entity.setOrder_number_code(KlnZxingUtil.CreateOneDCode("123456789"));
                         Intent intent = new Intent(getApplicationContext(), BtService.class);
                         intent.setAction(PrintUtil.ACTION_PRINT_TEST);
