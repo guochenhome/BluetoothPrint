@@ -121,7 +121,7 @@ public class PrintOrderDataMaker implements PrintDataMaker {
                     显示价格和不显示价格
                      */
                     if (orderInfoEntity.getAll_pirce() != null && !orderInfoEntity.getAll_pirce().equals("")) {
-                        printer.printInOneLine(orderInfoEntity.getList().get(i).getName(), "X" + orderInfoEntity.getList().get(i).getCount(), "￥" + orderInfoEntity.getList().get(i).getPrice(), 0);
+                        printer.printInOneLine(orderInfoEntity.getList().get(i).getName(), "X" + orderInfoEntity.getList().get(i).getCount(),  orderInfoEntity.getList().get(i).getPrice(), 0);
                         printer.printLineFeed();
                     } else {
                         printer.printInOneLine(orderInfoEntity.getList().get(i).getName(), "X" + orderInfoEntity.getList().get(i).getCount(), 0);
@@ -136,7 +136,7 @@ public class PrintOrderDataMaker implements PrintDataMaker {
 //=====================================================================================================================================
             if (orderInfoEntity.getAll_pirce() != null && !orderInfoEntity.getAll_pirce().equals("")) {
                 printer.setAlignLeft();
-                printer.printInOneLine("总计：", "￥" + orderInfoEntity.getAll_pirce(), 0);
+                printer.printInOneLine("总计：",  orderInfoEntity.getAll_pirce(), 0);
                 printer.printLine();
                 printer.printLineFeed();
             }
