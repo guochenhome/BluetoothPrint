@@ -162,7 +162,11 @@ public class PrintOrderDataMaker implements PrintDataMaker {
             printer.setAlignCenter();
             printer.print(this.orderInfoEntity.getTankinfo() + "\n");
             printer.printLineFeed();
-            printer.print("\n\n");
+            printer.print("\n");
+            printer.printLineFeed();
+            printer.print("\n");
+            printer.printLineFeed();
+            printer.print("\n");
             printer.printLineFeed();
             printer.feedPaperCutPartial();
 
