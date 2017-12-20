@@ -280,13 +280,13 @@ public abstract class PrinterWriter {
     @SuppressWarnings("unused")
     public void printInOneLine(String str1, String str2, String str3, String charsetName) throws IOException {
         int lineLength = getLineStringWidth(0);
-        int needEmpty = (lineLength - (getStringWidth(str1) + getStringWidth(str2) + getStringWidth(str3)) % lineLength) / 2;
+        int needEmpty = (lineLength - (getStringWidth(str1) + getStringWidth(str2) + getStringWidth(str3)) % lineLength) / 4;
         String empty = "";
         while (needEmpty > 0) {
             empty += " ";
             needEmpty--;
         }
-        print(str1 + empty + str2 + empty + str3, charsetName);
+        print(str1 + empty+empty+empty + str2 + empty + str3, charsetName);
     }
 
 
