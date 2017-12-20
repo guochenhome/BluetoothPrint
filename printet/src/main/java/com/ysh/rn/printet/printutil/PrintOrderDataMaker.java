@@ -108,7 +108,7 @@ public class PrintOrderDataMaker implements PrintDataMaker {
                 printer.print("药品信息\n");
                 printer.printLineFeed();
 
-                printer.setAlignCenter();
+                printer.setAlignLeft();
                 if (orderInfoEntity.getAll_pirce() != null && !orderInfoEntity.getAll_pirce().equals("")) {
                     printer.printInOneLine("药品", "数量", "单价", 0);
                 }else{
