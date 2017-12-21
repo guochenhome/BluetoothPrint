@@ -78,8 +78,10 @@ public class PrintOrderDataMaker implements PrintDataMaker {
             /**
              * 打印编码条形码
              */
-            ArrayList<byte[]> image = printer.getImageByte(this.orderInfoEntity.getOrder_number_code());
-            data.addAll(image);
+            if (this.orderInfoEntity.getOrder_number_code()!=null&&!"".equals(this.orderInfoEntity.getOrder_number_code())) {
+                ArrayList<byte[]> image = printer.getImageByte(this.orderInfoEntity.getOrder_number_code());
+                data.addAll(image);
+            }
 
 
             /**
@@ -111,7 +113,7 @@ public class PrintOrderDataMaker implements PrintDataMaker {
                 printer.setAlignLeft();
                 if (orderInfoEntity.getAll_pirce() != null && !orderInfoEntity.getAll_pirce().equals("")) {
                     printer.printInOneLine("药品", "数量", "单价", 0);
-                }else{
+                } else {
                     printer.printInOneLine("药品", "数量", 0);
                 }
                 printer.printLineFeed();
@@ -121,7 +123,7 @@ public class PrintOrderDataMaker implements PrintDataMaker {
                     显示价格和不显示价格
                      */
                     if (orderInfoEntity.getAll_pirce() != null && !orderInfoEntity.getAll_pirce().equals("")) {
-                        printer.printInOneLine(orderInfoEntity.getList().get(i).getName(), "X" + orderInfoEntity.getList().get(i).getCount(),  orderInfoEntity.getList().get(i).getPrice(), 0);
+                        printer.printInOneLine(orderInfoEntity.getList().get(i).getName(), "X" + orderInfoEntity.getList().get(i).getCount(), orderInfoEntity.getList().get(i).getPrice(), 0);
                         printer.printLineFeed();
                     } else {
                         printer.printInOneLine(orderInfoEntity.getList().get(i).getName(), "X" + orderInfoEntity.getList().get(i).getCount(), 0);
@@ -133,32 +135,35 @@ public class PrintOrderDataMaker implements PrintDataMaker {
                 printer.printLine();
                 printer.printLineFeed();
             }
-//=====================================================================================================================================
+//======================================================总价格模块===============================================================================
             if (orderInfoEntity.getAll_pirce() != null && !orderInfoEntity.getAll_pirce().equals("")) {
                 printer.setAlignLeft();
-                printer.printInOneLine("总计：",  orderInfoEntity.getAll_pirce(), 0);
+                printer.printInOneLine("总计：", orderInfoEntity.getAll_pirce(), 0);
                 printer.printLine();
                 printer.printLineFeed();
             }
 //=========================================患者姓名=====================================================================================
             if (orderInfoEntity.getName() != null && !orderInfoEntity.getName().equals("")) {
                 printer.setAlignLeft();
-                printer.print("患者姓名："+orderInfoEntity.getName());
+                printer.print("患者姓名：" + orderInfoEntity.getName());
                 printer.printLineFeed();
                 printer.printLine();
                 printer.printLineFeed();
             }
-            //================================================================
-            printer.setAlignCenter();
-            printer.print(this.orderInfoEntity.getRewema_string());
-            printer.printLineFeed();
 
-            data.add(printer.getDataAndReset());
+//=====================================================二维码模块==============================================================
+            if (orderInfoEntity.getErwema_coder() != null && !orderInfoEntity.getErwema_coder().equals("")) {
+                printer.setAlignCenter();
+                printer.print(this.orderInfoEntity.getRewema_string());
+                printer.printLineFeed();
+                data.add(printer.getDataAndReset());
 
-            ArrayList<byte[]> image1 = printer.getImageByte(this.orderInfoEntity.getErwema_coder());
-            data.addAll(image1);
+                ArrayList<byte[]> image1 = printer.getImageByte(this.orderInfoEntity.getErwema_coder());
+                data.addAll(image1);
 
-            printer.printLine();
+                printer.printLine();
+            }
+//========================================欢迎语==及签名==============================================================
             printer.setAlignCenter();
             printer.print(this.orderInfoEntity.getTankinfo() + "\n");
             printer.printLineFeed();
