@@ -138,7 +138,7 @@ public class PrintOrderDataMaker implements PrintDataMaker {
 //======================================================总价格模块===============================================================================
             if (orderInfoEntity.getAll_pirce() != null && !orderInfoEntity.getAll_pirce().equals("")) {
                 printer.setAlignLeft();
-                printer.printInOneLine("总计：", orderInfoEntity.getAll_pirce(), 0);
+                printer.printInOneLine("总计：","", orderInfoEntity.getAll_pirce(), 0);
                 printer.printLine();
                 printer.printLineFeed();
             }
