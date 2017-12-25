@@ -173,8 +173,99 @@ public class PrintOrderDataMaker implements PrintDataMaker {
             printer.printLineFeed();
             printer.print("\n");
             printer.printLineFeed();
-            printer.feedPaperCutPartial();
 
+            //============================================================================================================
+            // =====================================底单部分=============================================================
+            //============================================================================================================
+            if(orderInfoEntity.getIsRes()) {
+                /**
+                 * title
+                 */
+                printer.setAlignCenter();
+                printer.setEmphasizedOn();
+                printer.setFontSize(1);
+                printer.print(this.orderInfoEntity.getTitle()+"(底单)");
+                printer.printLineFeed();
+                printer.setEmphasizedOff();
+                printer.printLineFeed();
+
+                /**
+                 * 订单说明
+                 */
+                printer.printLineFeed();
+                printer.setFontSize(0);
+                printer.setAlignCenter();
+                printer.print(this.orderInfoEntity.getInfo() + "\n");
+                printer.printLineFeed();
+                /**
+                 * 虚线
+                 */
+                printer.setAlignLeft();
+                printer.printLine();
+                printer.printLineFeed();
+                /**
+                 * 信息部分
+                 */
+                printer.printLineFeed();
+                printer.setAlignLeft();
+                printer.print("订单编号: " + this.orderInfoEntity.getOrder_number());
+                printer.printLineFeed();
+                printer.print("订单时间: " + new SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.getDefault()).format(new Date(System.currentTimeMillis())));
+                printer.printLineFeed();
+                printer.print("地址    : " + this.orderInfoEntity.getAddress());
+                printer.printLineFeed();
+                printer.print("联系方式:" + this.orderInfoEntity.getPhone());
+                printer.printLineFeed();
+
+                printer.printLine();
+                printer.printLineFeed();
+
+                //----------------------------------------------------药品信息----------------------------------------------------------------------------------
+                if (orderInfoEntity.getList() != null && orderInfoEntity.getList().size() > 0) {
+                    printer.setAlignCenter();
+                    printer.print("药品信息\n");
+                    printer.printLineFeed();
+
+                    printer.setAlignLeft();
+                    if (orderInfoEntity.getAll_pirce() != null && !orderInfoEntity.getAll_pirce().equals("")) {
+                        printer.printInOneLine("药品", "数量", "单价", 0);
+                    } else {
+                        printer.printInOneLine("药品", "数量", 0);
+                    }
+                    printer.printLineFeed();
+
+                    for (int i = 0; i < orderInfoEntity.getList().size(); i++) {
+                    /*
+                    显示价格和不显示价格
+                     */
+                        if (orderInfoEntity.getAll_pirce() != null && !orderInfoEntity.getAll_pirce().equals("")) {
+                            printer.printInOneLine(orderInfoEntity.getList().get(i).getName(), "X" + orderInfoEntity.getList().get(i).getCount(), orderInfoEntity.getList().get(i).getPrice(), 0);
+                            printer.printLineFeed();
+                        } else {
+                            printer.printInOneLine(orderInfoEntity.getList().get(i).getName(), "X" + orderInfoEntity.getList().get(i).getCount(), 0);
+                            printer.printLineFeed();
+                        }
+
+                    }
+                    printer.printLineFeed();
+                    printer.printLine();
+                    printer.printLineFeed();
+                }
+                if (orderInfoEntity.getName() != null && !orderInfoEntity.getName().equals("")) {
+                    printer.setAlignLeft();
+                    printer.print("患者姓名：" + orderInfoEntity.getName());
+                    printer.printLineFeed();
+                    printer.printLine();
+                    printer.printLineFeed();
+                }
+                printer.print("\n");
+                printer.printLineFeed();
+                printer.print("\n");
+                printer.printLineFeed();
+
+            }
+
+            printer.feedPaperCutPartial();
             data.add(printer.getDataAndClose());
             return data;
         } catch (Exception e) {

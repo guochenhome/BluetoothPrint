@@ -71,8 +71,13 @@ public class OrderInfoEntity implements Parcelable {
      */
     private String name;
 
+    /**
+     * 是否打印底单
+     */
+    private int isRes;
 
-    public OrderInfoEntity(String title, String info, String order_number, Bitmap order_number_code, String time, String address, List<GoodsEntity> list, String all_pirce, String rewema_string, String erwema_coder, String tankinfo, Bitmap logo,String phone) {
+
+    public OrderInfoEntity(String title, String info, String order_number, Bitmap order_number_code, String time, String address, List<GoodsEntity> list, String all_pirce, String rewema_string, String erwema_coder, String tankinfo, Bitmap logo,String phone,int isRes) {
         super();
         this.title = title;
         this.info = info;
@@ -87,6 +92,7 @@ public class OrderInfoEntity implements Parcelable {
         this.tankinfo = tankinfo;
         this.logo = logo;
         this.phone=phone;
+        this.isRes=isRes;
     }
 
     public OrderInfoEntity() {
@@ -107,6 +113,7 @@ public class OrderInfoEntity implements Parcelable {
         logo = in.readParcelable(Bitmap.class.getClassLoader());
         phone=in.readString();
         name=in.readString();
+        isRes=in.readInt();
     }
 
     @Override
@@ -125,6 +132,7 @@ public class OrderInfoEntity implements Parcelable {
         dest.writeParcelable(logo, flags);
         dest.writeString(phone);
         dest.writeString(name);
+        dest.writeInt(isRes);
     }
 
     @Override
@@ -254,5 +262,13 @@ public class OrderInfoEntity implements Parcelable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean getIsRes() {
+        return isRes==1;
+    }
+
+    public void setIsRes(boolean isRes) {
+        this.isRes = isRes?1:0;
     }
 }
