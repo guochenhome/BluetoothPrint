@@ -76,8 +76,13 @@ public class OrderInfoEntity implements Parcelable {
      */
     private int isRes;
 
+    /**
+     * 诊断说明
+     */
+    private String explain;
 
-    public OrderInfoEntity(String title, String info, String order_number, Bitmap order_number_code, String time, String address, List<GoodsEntity> list, String all_pirce, String rewema_string, String erwema_coder, String tankinfo, Bitmap logo,String phone,int isRes) {
+
+    public OrderInfoEntity(String title, String info, String order_number, Bitmap order_number_code, String time, String address, List<GoodsEntity> list, String all_pirce, String rewema_string, String erwema_coder, String tankinfo, Bitmap logo,String phone,int isRes,String explain) {
         super();
         this.title = title;
         this.info = info;
@@ -93,6 +98,7 @@ public class OrderInfoEntity implements Parcelable {
         this.logo = logo;
         this.phone=phone;
         this.isRes=isRes;
+        this.explain=explain;
     }
 
     public OrderInfoEntity() {
@@ -114,6 +120,7 @@ public class OrderInfoEntity implements Parcelable {
         phone=in.readString();
         name=in.readString();
         isRes=in.readInt();
+        explain=in.readString();
     }
 
     @Override
@@ -133,6 +140,7 @@ public class OrderInfoEntity implements Parcelable {
         dest.writeString(phone);
         dest.writeString(name);
         dest.writeInt(isRes);
+        dest.writeString(explain);
     }
 
     @Override
@@ -270,5 +278,13 @@ public class OrderInfoEntity implements Parcelable {
 
     public void setIsRes(boolean isRes) {
         this.isRes = isRes?1:0;
+    }
+
+    public String getExplain() {
+        return explain;
+    }
+
+    public void setExplain(String explain) {
+        this.explain = explain;
     }
 }

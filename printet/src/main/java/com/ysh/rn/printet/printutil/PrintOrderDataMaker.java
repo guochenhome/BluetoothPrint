@@ -150,6 +150,14 @@ public class PrintOrderDataMaker implements PrintDataMaker {
                 printer.printLine();
                 printer.printLineFeed();
             }
+            //=============================诊断说明============================================================================
+            if (orderInfoEntity.getExplain() != null && !orderInfoEntity.getExplain().equals("")) {
+                printer.setAlignLeft();
+                printer.print("诊断说明：" + orderInfoEntity.getExplain());
+                printer.printLineFeed();
+                printer.printLine();
+                printer.printLineFeed();
+            }
 
 //=====================================================二维码模块==============================================================
             if (orderInfoEntity.getErwema_coder() != null && !orderInfoEntity.getErwema_coder().equals("")) {
@@ -251,9 +259,18 @@ public class PrintOrderDataMaker implements PrintDataMaker {
                     printer.printLine();
                     printer.printLineFeed();
                 }
+                //============================患者姓名================================================
                 if (orderInfoEntity.getName() != null && !orderInfoEntity.getName().equals("")) {
                     printer.setAlignLeft();
                     printer.print("患者姓名：" + orderInfoEntity.getName());
+                    printer.printLineFeed();
+                    printer.printLine();
+                    printer.printLineFeed();
+                }
+                //=============================诊断说明============================================================================
+                if (orderInfoEntity.getExplain() != null && !orderInfoEntity.getExplain().equals("")) {
+                    printer.setAlignLeft();
+                    printer.print("诊断说明：" + orderInfoEntity.getExplain());
                     printer.printLineFeed();
                     printer.printLine();
                     printer.printLineFeed();
