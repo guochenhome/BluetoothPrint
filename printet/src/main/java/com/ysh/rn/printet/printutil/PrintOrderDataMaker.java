@@ -153,7 +153,7 @@ public class PrintOrderDataMaker implements PrintDataMaker {
             //=============================诊断说明============================================================================
             if (orderInfoEntity.getExplain() != null && !orderInfoEntity.getExplain().equals("")) {
                 printer.setAlignLeft();
-                printer.print("诊断说明：" + orderInfoEntity.getExplain());
+                printer.print("疾病诊断：" + orderInfoEntity.getExplain());
                 printer.printLineFeed();
                 printer.printLine();
                 printer.printLineFeed();
@@ -270,7 +270,7 @@ public class PrintOrderDataMaker implements PrintDataMaker {
                 //=============================诊断说明============================================================================
                 if (orderInfoEntity.getExplain() != null && !orderInfoEntity.getExplain().equals("")) {
                     printer.setAlignLeft();
-                    printer.print("诊断说明：" + orderInfoEntity.getExplain());
+                    printer.print("疾病诊断：" + orderInfoEntity.getExplain());
                     printer.printLineFeed();
                     printer.printLine();
                     printer.printLineFeed();
